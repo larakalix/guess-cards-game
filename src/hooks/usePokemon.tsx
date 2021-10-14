@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const usePokemon = () => {
 
-    const { equals, hits, addEquals, cleanEquals, addHits } = useContext(CardContext);
+    const { equals, hits, wins, addEquals, cleanEquals, cleanHits, addHits, addWin } = useContext(CardContext);
 
     const [loading, setLoading] = useState(true);
     const [list, setList] = useState<Pokemon[]>([]);
@@ -40,6 +40,7 @@ const usePokemon = () => {
         ];
 
         suffle = suffle.map((pokemon) => { return { ...pokemon, selector: uuidv4() } });
+        suffle = suffle.sort(() => .5 - Math.random());
 
         setList(suffle);
         setLoading(false);
@@ -55,10 +56,13 @@ const usePokemon = () => {
         hits,
         loading,
         list,
+        wins,
         load,
         addEquals,
         cleanEquals,
+        cleanHits,
         addHits,
+        addWin,
     }
 }
 

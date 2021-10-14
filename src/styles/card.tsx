@@ -7,10 +7,11 @@ export const MainBox = styled(Box)`
     height: 85vh;
     display: flex;
     justify-content: center;
+    margin-top: 1rem;
 `;
 
 export const CardBox = styled(Grid)`
-    background-color: #e75151;
+    background-color: #30a7d7;
     padding: 1.2rem;
     border-radius: 0.5rem;
     min-width: 70vw;
@@ -21,7 +22,8 @@ export const Card = styled(GridItem)`
     background-color: transparent;
     perspective: 1000px;
 
-    &:hover .inner, .active {
+    &:hover .inner,
+    .active {
         transform: rotateY(180deg);
     }
 `;
@@ -45,7 +47,7 @@ export const CardFront = styled(Box)`
     justify-content: center;
     align-items: center;
     backface-visibility: hidden;
-    background-color: #6977e1;
+    background-color: #e75151;
     color: black;
     padding: 1rem;
 `;
@@ -60,20 +62,21 @@ export const CardBack = styled(Box)`
     align-items: center;
     flex-direction: column;
     backface-visibility: hidden;
-    background-color: #f7e466;
+    background-color: #ffee18;
     color: white;
     transform: rotateY(180deg);
     overflow: hidden;
     padding: 1rem;
 
     &.active {
-        background-color: #47ff63;
+        background-color: #01ed9f;
     }
 `;
 
 export const CartTitle = styled(Text)`
     font-size: 0.6rem;
     font-weight: bold;
+    margin-top: 0.4rem;
     text-transform: uppercase;
     color: #3e3a39;
 `;

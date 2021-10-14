@@ -9,67 +9,56 @@ interface Props {
     pokemon: Pokemon;
 }
 
-const PokeCard = ({ pokemon: { id, selector, name, picture } }: Props) => {
+const PokeCard = ({ pokemon }: Props) => {
+
+    const { id, selector, name, picture } = pokemon;
 
     const { equals, hits, addEquals, cleanEquals, addHits } = usePokemon();
-    // const [active, setActive] = useState(false);
 
-    const isActive = (selector: string): boolean => {
-        return equals.filter(e => e === selector).length === 2;
+    const isSelected = (pokemon: Pokemon): boolean => {
+        return equals.filter(e => e.selector === selector).length === 1;
     }
 
-    const selected = (selector: string): boolean => {
-        return equals.filter(e => e === selector).length === 1;
+    const selected = (pokemon: Pokemon): boolean => {
+        return equals.filter(e => e.id === id).length === 2 || hits.filter(e => e.id === id).length === 1;
     }
 
-    const guess = (selector: string) => {
-        // setActive(true);
+    const guess = (pokemon: Pokemon) => {
 
         // Validate if pokemon was hitted
-        if (hits.filter(e => e === selector).length > 0) {
-            console.clear();
-            console.log('Pokemon was already hitted');
+        if (hits.filter(e => e.id === id).length > 0 || equals.filter(e => e.selector === selector).length > 0)
             return;
-        }
 
         // Validate if pokemon is prev selected
-        if (equals.filter(e => e === selector).length === 1) {
-            addHits(selector);
+        if (equals.filter(e => e.id === id).length === 1) {
+            addHits(pokemon);
             cleanEquals();
-            
-            console.clear();
-            console.log('Pokemon HIT!!');
         }
         // Validate if pokemon is not prev selected
-        else if (equals.filter(e => e === selector).length === 0) {
-            console.clear();
-            console.log('First Pokemon hit');
-            console.log('Equals length', equals.length);
-            addEquals(selector);
-            if (equals.filter(e => e === id).length === 0) {
-                console.log('Clean Equals');
-                cleanEquals();
-                // setActive(false);
-            }
+        else if (equals.filter(e => e.id === id).length === 0 && equals.length < 1)
+            addEquals(pokemon);
+        else {
+            addEquals(pokemon);
+            setTimeout(() => cleanEquals(), 500);
         }
     }
 
     return (
         <Card
-            onClick={() => guess(selector)}>
+            onClick={() => guess(pokemon)}>
             <CardInner
-                className={`inner ${isActive(selector) || selected(selector) ? 'active' : ''}`}
+                className={`inner ${isSelected(pokemon) || selected(pokemon) ? 'active' : ''}`}
             >
                 <CardFront>
                     <Image
-                        w="65%"
-                        h="100%"
+                        w="50%"
+                        h="95%"
                         borderRadius="0.5rem"
                         objectFit="cover"
                         src={pokeball} alt="Pokemon Card Guess Game" />
                 </CardFront>
                 <CardBack
-                    className={`${selected(selector) ? 'active' : ''}`}
+                    className={`${isSelected(pokemon) || selected(pokemon) ? 'active' : ''}`}
                 >
                     <Badge>#{id}</Badge>
                     <Image
@@ -79,7 +68,6 @@ const PokeCard = ({ pokemon: { id, selector, name, picture } }: Props) => {
                         alt={name}
                         fallbackSrc={notfound} />
                     <CartTitle>{name}</CartTitle>
-                    <CartTitle>{selector}</CartTitle>
                 </CardBack>
             </CardInner>
         </Card>
