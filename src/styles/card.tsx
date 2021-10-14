@@ -3,19 +3,18 @@ import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/layout';
 
 export const MainBox = styled(Box)`
-    height: 90vw;
-    width: 90vw;
+    width: 100%;
+    height: 85vh;
     display: flex;
     justify-content: center;
-    align-items: center;
 `;
 
 export const CardBox = styled(Grid)`
     background-color: #e75151;
     padding: 1.2rem;
     border-radius: 0.5rem;
-    min-width: 80vw;
-    min-height: 80vh;
+    min-width: 70vw;
+    max-height: 85vh;
 `;
 
 export const Card = styled(GridItem)`

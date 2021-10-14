@@ -1,5 +1,6 @@
-import { Button, Spinner } from '@chakra-ui/react';
+import { Button, Link, Spinner } from '@chakra-ui/react';
 import { Center, Text } from '@chakra-ui/layout';
+import { AtSignIcon } from '@chakra-ui/icons';
 import { CardBox, MainBox } from 'styles/card';
 import usePokemon from 'hooks/usePokemon';
 import PokeCard from "components/PokeCard";
@@ -29,6 +30,7 @@ const Home = () => {
                     }
                 </CardBox>
             </MainBox>
+            <Link padding="5" href="https://kalixthedev.netlify.app/" target="_blank">Made by <AtSignIcon /> Ivan Lara</Link>
         </Center>
     )
 }

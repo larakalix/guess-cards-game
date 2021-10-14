@@ -46,7 +46,7 @@ const PokeCard = ({ pokemon: { id, selector, name, picture } }: Props) => {
             console.log('First Pokemon hit');
             console.log('Equals length', equals.length);
             addEquals(selector);
-            if (equals.length === 1) {
+            if (equals.filter(e => e === id).length === 0) {
                 console.log('Clean Equals');
                 cleanEquals();
                 // setActive(false);
@@ -62,7 +62,8 @@ const PokeCard = ({ pokemon: { id, selector, name, picture } }: Props) => {
             >
                 <CardFront>
                     <Image
-                        boxSize="50%"
+                        w="65%"
+                        h="100%"
                         borderRadius="0.5rem"
                         objectFit="cover"
                         src={pokeball} alt="Pokemon Card Guess Game" />
